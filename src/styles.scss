@@ -1,0 +1,89 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+body{
+  // @include gradient-x-three-colors(#34B7ED, #0BE9B7, 50%, #3662B7);
+  @include gradient-x-three-colors( #3662B7, #0BE9B7, 75%, #34B7ED)
+}
+.view {
+    background-size: cover;
+}    
+@media (min-aspect-ratio: 16/9) {
+  .video-foreground { height: 300%; top: -100%; }
+}
+@media (max-aspect-ratio: 16/9) {
+  .video-foreground { width: 300%; left: -100%; }
+}
+.navbar {
+    background-color: transparent;
+}
+.top-nav-collapse {
+    background-color: #4285F4;
+}
+@media only screen and (max-width: 768px) {
+    .navbar {
+        background-color: #4285F4;
+    }
+}
+
+.video-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%; 
+  overflow: hidden;
+  z-index: -100;
+}
+
+.video-container video {
+  /* Make video to at least 100% wide and tall */
+  min-width: 100%; 
+  min-height: 100%; 
+  
+  /* Setting width & height to auto prevents the browser from stretching or squishing the video */
+  width: auto;
+  height: auto;
+  
+  /* Center the video */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: -100;
+}
+
+html {
+  font-size: 10px;
+}
+
+@include media-breakpoint-up(sm) {
+  html {
+    font-size: 12px;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  html {
+    font-size: 16px;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  html {
+    font-size: 18px;
+  }
+}
+                        
+.gy3 {
+  @include gradient-y-three-colors();
+}
+
+.gx3 {
+  @include gradient-x-three-colors();
+}
+
+//$start-color: #00b3ee, $mid-color: #7a43b6, $color-stop: 50%, $end-color: #c3325f
+.aqua-gradient{
+  @include gradient-x-three-colors(#34B7ED, #0BE9B7, 50%, #3662B7);
+}

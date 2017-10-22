@@ -1,0 +1,11 @@
+<div *ngIf="about" >
+  <div class="row">
+    <div class="col-12">
+      <h1 class="white-text">{{about.title}}</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4"><img class="animated tada infinite" src="{{about.featuredImg}}"></div>
+    <div class="col-8 white-text" [innerHtml]="about.content"></div>
+  </div>
+</div>

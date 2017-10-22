@@ -1,0 +1,42 @@
+{
+    "preLoaded": [
+        {
+            "method": "getContent",
+            "arguments": {
+                "id": 26,
+                "slug": "landing-banner",
+                "type": "category"
+            },
+            "contentName": "BannerPosts"
+        },
+        {
+            "method": "getContent",
+            "arguments": {
+                "id": 28,
+                "slug": "services",
+                "type": "category"
+            },
+            "contentName": "ServicePosts"
+        },
+        {
+            "method": "getContent",
+            "arguments": {
+                "id": 97,
+                "type": "single"
+            },
+            "contentName": "AboutPost"
+        }
+    ],
+    "landingPage": {
+        "logoUrl": "wp-content/uploads/FluidNotions-1PNG-w-e1508113730665.png",
+        "videoPoster": "wp-content/uploads/fn-bk.png",
+        "video": "wp-content/uploads/Slow-Motion-Water-Droplet-Falling-Breaks-Surface-Tension-and-Makes-Ripples-in-HD-YouTube-Video-View.mp4",
+        "pageContentBackground": "wp-content/uploads/pattern21.png"
+    },
+    "host":{
+        "PROTOCOL": "http",
+        "PORT": 8080,
+        "HOST_NAME": "localhost",
+        "SUB_DIR": "wordpress"
+    }
+}

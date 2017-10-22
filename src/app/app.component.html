@@ -1,0 +1,72 @@
+<!-- <bootstrap-growl [alertCount]="3" [autoClose]="2000"></bootstrap-growl> -->
+<header>
+    <mdb-navbar id="home" SideClass="navbar fixed-top navbar-expand-xl navbar-dark  scrolling-navbar" [containerInside]="false">
+        <logo>
+            <a class="navbar-brand" href="#">
+                 <img src="{{logoUrl}}" height="30" class="d-inline-block align-top" alt="">
+            </a>
+        </logo>
+        <links>
+
+            <form class="form-inline ml-auto">
+                <button *ngFor="let menuItem of menuItems | async" class="btn btn-cyan darken-3 waves-light" mdbRippleRadius type="button"
+                    [ngx-scroll-to]="(menuItem.title === 'home'? menuItem.url :'#landing-content')" (click)="showLandingContentPage(menuItem.url)">{{menuItem.title}}</button>
+            </form>
+
+        </links>
+    </mdb-navbar>
+    <!-- Main -->
+    <div class="view" style="min-height:100vh;position:relative;">
+        <div class="full-bg-img flex-center">
+            <div class="container text-center wow fadeInUp">
+                <animated-text-banner></animated-text-banner>
+            </div>
+        </div>
+    </div>
+    <div class="video-container">
+        <video loop muted autoplay poster="{{videoPoster}}">
+            <source src="{{video}}"
+                type="video/mp4">
+        </video>
+    </div>
+    <!-- /.Main -->
+</header>
+<!--Main Navigation-->
+
+<!--Main Layout-->
+<main>
+    <div id="landing-content" style="min-height:10vh"></div>
+    <div class="container">
+        <router-outlet></router-outlet>
+    </div>
+</main>
+<!--Main Layout-->
+
+<!--Footer-->
+<footer class="page-footer blue center-on-small-only">
+
+    <!--Footer Links-->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <nav class="nav nav-pills nav-fill p-3">
+                    <a (click)="showLandingContentPage(menuItem.url)" class="nav-item nav-link ml-2 aqua-gradient" *ngFor="let menuItem of menuItems | async" mdbRippleRadius [ngx-scroll-to]="(menuItem.title === 'home'? menuItem.url :'#landing-content')">{{menuItem.title}}</a>
+                </nav>
+            </div>
+              <div class="col-md-4">
+                <!-- <h5 class="title">Footer Content</h5>
+                <p>Here you can use rows and columns here to organize your footer content.</p> -->
+            </div>
+        </div>
+    </div>
+    <!--/.Footer Links-->
+
+    <!--Copyright-->
+    <div class="footer-copyright">
+        <div class="container-fluid">
+          Designed by fluidnotions with ngx on WP-REST © 2017 Copyright
+        </div>
+    </div>
+    <!--/.Copyright-->
+</footer>
+<!--/.Footer-->

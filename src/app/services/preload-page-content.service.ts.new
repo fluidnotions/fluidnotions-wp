@@ -1,0 +1,54 @@
+import { LocalStorageService } from 'angular-2-local-storage';
+import { Injectable } from '@angular/core';
+import { EventService } from "app/services/event.service";
+import { Observable } from 'rxjs/Rx';
+import 'rxjs/add/operator/map';
+import { ConfigureService } from 'ng4-configure/ng4-configure';
+import { ContentRequest, WpClientService } from "app/services/wp-client.service";
+
+@Injectable()
+export class PreloadPageContentService {
+  pullContentActions = [];
+  pullIdActions = [];
+
+  category: ContentRequest[];
+  single: ContentRequest[];
+
+  constructor(private wp: WpClientService, private localStorageService: LocalStorageService, private configService: ConfigureService) {
+    console.dir(configService.config);
+    this.category = configService.config.preLoaded.filter(pre => (pre.arguments.type === "category"));
+    this.single = configService.config.preLoaded.filter(pre => (pre.arguments.type === "single"));
+  }
+
+  loadContent() {
+    this.single.forEach(item => {
+      this.pullContentActions.push(this.wp[item.method](item));
+    });
+    this.category.forEach(item => {
+      this.pullIdActions.push(this.wp.getContentCategoryIdFromSlug(item.arguments.slug));
+    });
+    return Observable.forkJoin(this.pullIdActions)
+      .map((responseArray) => {
+        for (var i = 0; i < responseArray.length; i++) {
+          this.category[i].arguments.id = responseArray[i]["id"];
+        }
+        this.category.forEach(item => {
+          this.pullContentActions.push(this.wp[item.method](item));
+        });
+
+        if (this.pullContentActions.length > 0) {
+          
+          Observable.forkJoin(this.pullContentActions).subscribe((responseArray) => {
+            console.dir(responseArray);
+            let index = 0;
+            responseArray.forEach((res: any) => {
+              console.dir(res);
+              this.localStorageService.add(res.contentName, res);
+            })
+          });
+        }
+      })
+  }
+
+
+}
